@@ -16,9 +16,9 @@ const uploadCSV = () => {
 }
 
   return (
-    <body>
+    <>
       <header>
-        <a href="#main" class="skip">Skip to main content</a>
+        <a href="#main" className="skip">Skip to main content</a>
         <div>
           <img src={voleryLogo} className='logo'/>
         </div>
@@ -41,12 +41,12 @@ const uploadCSV = () => {
           {error && `Error: ${error}`}
         </p>
         <p>
-          <button disabled="true">
+          <button disabled={true}>
             Download site
           </button>
         </p>
       </main>
-    </body>
+    </>
   )
 }
 
