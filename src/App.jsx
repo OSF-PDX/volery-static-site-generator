@@ -16,11 +16,14 @@ const uploadCSV = () => {
 }
 
   return (
-    <>
-      <main id="center">
+    <body>
+      <header>
+        <a href="#main" class="skip">Skip to main content</a>
         <div>
           <img src={voleryLogo} className='logo'/>
         </div>
+      </header>
+      <main id="main">
         <h1>Volery</h1>
         <p>
           Conference name: <input />
@@ -43,7 +46,7 @@ const uploadCSV = () => {
           </button>
         </p>
       </main>
-    </>
+    </body>
   )
 }
 
