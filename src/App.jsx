@@ -2,6 +2,19 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
+import csv2json from './services/csv-to-json'
+
+const csvData = `name,age,city
+Alice,30,New York
+Bob,25,Los Angeles
+Charlie,35,Chicago`
+
+const jsonData = csv2json('data.csv', csvData)
+// Simple test of the csv2json function.
+console.log(jsonData)
+
+
+
 import './App.css'
 
 function App() {
