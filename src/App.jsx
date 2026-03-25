@@ -2,30 +2,47 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
+import voleryLogo from './assets/volery-logo-sketch.png'
 import './App.css'
 
+
+
 function App() {
-  const [count, setCount] = useState(0)
+  const [error, setError] = useState(null);
+
+  // placeholder function
+const uploadCSV = () => {
+  setError("No upload function exists yet.");
+}
 
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
+      <main id="center">
         <div>
-          <h1>Nonprofit Technology Conference 2027</h1>
+          <img src={voleryLogo} className='logo'/>
         </div>
-        <button
-          className="csv-upload"
-          onClick={() => console.log("You clicked the 'Upload CSV' button.")}
-        >
-          Upload CSV (placeholder)
-        </button>
-      </section>
-      <section id="spacer"></section>
+        <h1>Volery</h1>
+        <p>
+          Conference name: <input />
+        </p>
+        <p>
+          <button
+            className="csv-upload"
+            onClick={uploadCSV}
+            aria-describedby='csv-error'
+          >
+            Upload CSV
+          </button>
+        </p>
+        <p id="csv-error" aria-live="polite" style={{color: 'red'}}>
+          {error && `Error: ${error}`}
+        </p>
+        <p>
+          <button disabled="true">
+            Download site
+          </button>
+        </p>
+      </main>
     </>
   )
 }
