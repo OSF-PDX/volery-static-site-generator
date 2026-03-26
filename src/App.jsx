@@ -9,8 +9,11 @@ Alice,30,New York
 Bob,25,Los Angeles
 Charlie,35,Chicago`;
 
-const jsonData = csv2json("data.csv", csvData);
+
+
+const jsonData = csv2json("persons.csv", csvData);
 // Simple test of the csv2json function.
+console.log(jsonData);
 console.log(JSON.stringify(jsonData));
 
 import "./App.css";

@@ -12,8 +12,11 @@ export const csv2json = (filename, contents) => {
         return obj;
     });
     
-    const fileData = {
-        filename,
+    const objectName = filename.split('.')[0]; // Use filename without extension as object name
+
+    const fileData = {    
+        objectName,    
+        headers,
         data
     };
     return fileData;
