@@ -19,7 +19,6 @@ function App() {
       </header>
       <main id="main">
         <h1>Volery</h1>
-        <form>
           <p>
             Conference name: <input />
           </p>
@@ -40,7 +39,6 @@ function App() {
               Download site
             </button>
           </p>
-        </form>
       </main>
     </>
   )
