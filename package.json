@@ -2,6 +2,9 @@
   "name": "volery-static-site-generator",
   "private": true,
   "version": "0.0.0",
+  "engines": {
+    "npm": "~11.7.0"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
