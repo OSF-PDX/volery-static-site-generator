@@ -38,8 +38,6 @@ function App() {
 
   return (
     <>
-      <DownloadButton />
-      <RenderedTemplate />
       <header>
         <a href="#main" className="skip">Skip to main content</a>
         <div>
@@ -64,9 +62,7 @@ function App() {
             {error && `Error: ${error}`}
           </p>
           <p>
-            <button disabled={true}>
-              Download site
-            </button>
+              <DownloadButton/>
           </p>
       </main>
     </>
