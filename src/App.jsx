@@ -3,7 +3,11 @@ import { useState } from "react";
 // import viteLogo from "./assets/vite.svg";
 // import heroImg from "./assets/hero.png";
 import csv2json from "./services/csv-to-json";
-import voleryLogo from './assets/volery-logo-sketch.png'
+import voleryLogo from './assets/volery-logo-sketch.png';
+import { DownloadButton } from "./services/zip-download";
+import { RenderedTemplate } from "./services/templating";
+
+
 
 const csvData = `name,age,city
 Alice,30,New York
@@ -58,9 +62,7 @@ function App() {
             {error && `Error: ${error}`}
           </p>
           <p>
-            <button disabled={true}>
-              Download site
-            </button>
+              <DownloadButton/>
           </p>
       </main>
     </>
