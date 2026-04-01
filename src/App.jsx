@@ -51,7 +51,7 @@ function App() {
         console.log('File selected:', csvFilename);
         console.log('File object:', file);
         file.text().then(contents => {
-          console.log('File contents:', contents);
+          //console.log('File contents:', contents);
           setError(null);
           //const jsonData = csv2json(file.name, contents);
             

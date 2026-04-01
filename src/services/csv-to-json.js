@@ -1,4 +1,5 @@
 export const csv2json = (filename, contents) => {
+    console.log('Filename:', filename);
     console.log('Contents:', contents);
     // Parse CSV contents and convert to JSON
     const lines = contents.trim().split('\n');
