@@ -1,22 +1,5 @@
-import JSZip from "jszip";
-import nunjucks from "nunjucks";
 import streamSaver from "streamsaver"
-
-
-function render_from_template(){
-    nunjucks.configure('/templates', { autoescape: true });
-    return(nunjucks.render("test.njk", {username: "Alice"}));
-}
-
-function RenderedTemplate(){
-    return(
-        <>
-        <div>
-            {render_from_template()}
-        </div>
-        </>
-    )
-}
+import JSZip from "jszip";
 
 function zip_with_folders(){
     const zip = new JSZip;
@@ -61,4 +44,4 @@ function DownloadButton(){
     );
 }
 
-export {DownloadButton, RenderedTemplate}
+export {DownloadButton, save_zip}
