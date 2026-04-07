@@ -1,7 +1,7 @@
 import streamSaver from "streamsaver"
 import JSZip from "jszip";
 
-function zip_with_folders(){
+function zipWithFolders(){
     const zip = new JSZip;
     zip.file("index.html", "hello, world!");
     zip.file("index.html", "<h1>hello, world!</h1>"); //can overwrite files
@@ -13,17 +13,7 @@ function zip_with_folders(){
     return(zip);
 }
 
-async function save_zip(zip) {
-    // FILESYSTEM API NOT UNIVERSALLY SUPPORTED
-    // this is our entry point into the user's file system
-    // const saveHandle = window.showSaveFilePicker();
-    // const writableStream = await saveHandle.createWritable();
-
-    // NODESTREAM NOT SUPPORTED IN BROWSER
-    // zip.generateNodeStream({type:'uint8array'})
-    // .pipeTo(writableStream)
-    // .on("finish", ()=>{writableStream.close();});
-
+export async function saveZip(zip) {
     const writableStream = streamSaver.createWriteStream('my-Volery.zip');
     const writer =  writableStream.getWriter();
     zip.generateInternalStream({type:'uint8array'})
@@ -33,15 +23,15 @@ async function save_zip(zip) {
 }
 
 function DownloadButton(){
-    const zip = zip_with_folders();
+    const zip = zipWithFolders();
 
     return(
         <>
-        <button onClick={()=>{save_zip(zip)}}>
+        <button onClick={()=>{saveZip(zip)}}>
             Download zip!
         </button>
         </>
     );
 }
 
-export {DownloadButton, save_zip}
+export {DownloadButton}

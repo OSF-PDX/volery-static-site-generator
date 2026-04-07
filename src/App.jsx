@@ -2,6 +2,8 @@ import { useState } from "react";
 import csv2json from "./services/csv-to-json";
 import voleryLogo from './assets/volery-logo-sketch.png';
 import { DownloadButton } from "./services/zip-download";
+import {saveZip} from "./services/zip-download";
+import { buildSiteZip } from "./services/generate-site";
 import { RenderedTemplate } from "./services/templating";
 
 const csvData = `name,age,city
@@ -17,6 +19,11 @@ import "./App.css";
 
 function App() {
   const [error, setError] = useState(null);
+
+  const generateWebsite = () => {
+    const zip = buildSiteZip();
+    saveZip(zip);
+  }
 
   const uploadCSV = () => {
     setError("No upload function exists yet.");
@@ -51,7 +58,7 @@ function App() {
             <DownloadButton/>
           </p>
           <p>
-            <RenderedTemplate />
+            <button onClick={generateWebsite}>GENERATE WEBSITE</button>
           </p>
       </main>
     </>
