@@ -1,35 +1,21 @@
 import { useState } from "react";
-// import reactLogo from "./assets/react.svg";
-// import viteLogo from "./assets/vite.svg";
-// import heroImg from "./assets/hero.png";
 import csv2json from "./services/csv-to-json";
 import voleryLogo from './assets/volery-logo-sketch.png';
 import { DownloadButton } from "./services/zip-download";
 import { RenderedTemplate } from "./services/templating";
-
-
 
 const csvData = `name,age,city
 Alice,30,New York
 Bob,25,Los Angeles
 Charlie,35,Chicago`;
 
-
-
 const jsonData = csv2json("persons.csv", csvData);
-// Simple test of the csv2json function.
 console.log(jsonData);
 console.log(JSON.stringify(jsonData));
 
 import "./App.css";
 
 function App() {
-  //const [count, setCount] = useState(0);
-//import { useState } from 'react'
-
-
-
-//function App() {
   const [error, setError] = useState(null);
 
   const uploadCSV = () => {
@@ -62,7 +48,10 @@ function App() {
             {error && `Error: ${error}`}
           </p>
           <p>
-              <DownloadButton/>
+            <DownloadButton/>
+          </p>
+          <p>
+            <RenderedTemplate />
           </p>
       </main>
     </>
