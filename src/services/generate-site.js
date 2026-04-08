@@ -1,15 +1,6 @@
 import JSZip from "jszip";
 import csvToJSON from "./csv-to-json";
 
-async function loadScheduleFromCSV() {
-  const response = await fetch("/schedule.csv");
-  const text = await response.text();
-  const parsed = csvToJSON("schedule.csv", text);
-  // csvToJSON returns { objectName, headers, data }
-  // generate-site expects { schedule: [...] }
-  return { schedule: parsed.data };
-}
-
 function formatSession(session) {
   return `
     <li class="session">
@@ -17,7 +8,7 @@ function formatSession(session) {
       <p class="meta">${session.StartTime} - ${session.EndTime} | ${session.Location}</p>
       <p class="speaker">${session.Speaker}</p>
       <p>${session.Description ?? ""}</p>
-    </i>
+    </li>
   `;
 }
 
@@ -49,8 +40,9 @@ const CSS = `
   .speaker { font-weight: bold; }
 `;
 
-export async function buildSiteZip() {
-  const scheduleData = await loadScheduleFromCSV();
+export async function buildSiteZipFromCSV(csvText) {
+  const parsed = csvToJSON("schedule.csv", csvText);
+  const scheduleData = { schedule: parsed.data };
   const zip = new JSZip();
   zip.file("index.html", generateHTML(scheduleData));
   zip.file("style.css", CSS);

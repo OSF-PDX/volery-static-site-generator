@@ -1,21 +1,38 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import voleryLogo from './assets/volery-logo-sketch.png';
-import { DownloadButton } from "./services/zip-download";
 import {saveZip} from "./services/zip-download";
-import { buildSiteZip } from "./services/generate-site";
+import { buildSiteZipFromCSV } from "./services/generate-site";
 
 import "./App.css";
 
 function App() {
   const [error, setError] = useState(null);
-
-  const generateWebsite = async () => {
-    const zip = await buildSiteZip();
-    saveZip(zip);
-  }
+  const [csvText, setCSVText ] = useState(null);
+  const fileInputRef = useRef(null);
 
   const uploadCSV = () => {
-    setError("No upload function exists yet.");
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (!file.name.endsWith(".csv")) {
+      setError("Please upload a CSV file.");
+      setCSVText(null);
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      setCSVText(evt.target.result);
+      setError(null);
+    };
+    reader.readAsText(file);
+  };
+
+  const generateWebsite = async () => {
+    const zip = await buildSiteZipFromCSV(csvText);
+    saveZip(zip);
   }
 
   return (
@@ -29,9 +46,14 @@ function App() {
       <main id="main">
         <h1>Volery</h1>
           <p>
-            Conference name: <input />
-          </p>
-          <p>
+            {/* Hidden file input, triggered by the button below */}
+            <input 
+              ref={fileInputRef}
+              type="file"
+              accept=".csv"
+              style={{display: "none"}}
+              onChange={handleFileChange}
+            />
             <button
               className="csv-upload"
               onClick={uploadCSV}
@@ -44,10 +66,12 @@ function App() {
             {error && `Error: ${error}`}
           </p>
           <p>
-            <DownloadButton/>
-          </p>
-          <p>
-            <button onClick={generateWebsite}>GENERATE WEBSITE</button>
+            <button
+              onClick={generateWebsite}
+              disabled={!csvText}
+            >
+              GENERATE WEBSITE
+            </button>
           </p>
       </main>
     </>
