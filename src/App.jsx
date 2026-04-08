@@ -9,8 +9,8 @@ import "./App.css";
 function App() {
   const [error, setError] = useState(null);
 
-  const generateWebsite = () => {
-    const zip = buildSiteZip();
+  const generateWebsite = async () => {
+    const zip = await buildSiteZip();
     saveZip(zip);
   }
 

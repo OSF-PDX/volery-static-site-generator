@@ -1,27 +1,14 @@
 import JSZip from "jszip";
+import csvToJSON from "./csv-to-json";
 
-// hardcoded JSON. delete later
-const HARDCODED_SCHEDULE = {
-  schedule: [
-    {
-      Title:
-        "B2B SAAS applications for automated data integration to improve federal compliance",
-      Description: "A talk about data integration",
-      StartTime: "2026-03-12-1600Z0",
-      EndTime: "2026-03-12-1700Z0",
-      Location: "250A",
-      Speaker: "John Apple",
-    },
-    {
-      Title: "How about Open Source?",
-      Description: "A cool and informative talk about open source",
-      StartTime: "2026-03-13-1400Z0",
-      EndTime: "2026-03-13-1430Z0",
-      Location: "Online (Zoom)",
-      Speaker: "Mr. OpenSource",
-    },
-  ],
-};
+async function loadScheduleFromCSV() {
+  const response = await fetch("/schedule.csv");
+  const text = await response.text();
+  const parsed = csvToJSON("schedule.csv", text);
+  // csvToJSON returns { objectName, headers, data }
+  // generate-site expects { schedule: [...] }
+  return { schedule: parsed.data };
+}
 
 function formatSession(session) {
   return `
@@ -62,7 +49,8 @@ const CSS = `
   .speaker { font-weight: bold; }
 `;
 
-export function buildSiteZip(scheduleData = HARDCODED_SCHEDULE) {
+export async function buildSiteZip() {
+  const scheduleData = await loadScheduleFromCSV();
   const zip = new JSZip();
   zip.file("index.html", generateHTML(scheduleData));
   zip.file("style.css", CSS);
