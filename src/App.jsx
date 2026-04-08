@@ -1,18 +1,8 @@
 import { useState } from "react";
-import csvToJSON from "./services/csv-to-json";
 import voleryLogo from './assets/volery-logo-sketch.png';
 import { DownloadButton } from "./services/zip-download";
 import {saveZip} from "./services/zip-download";
 import { buildSiteZip } from "./services/generate-site";
-
-const csvData = `name,age,city
-Alice,30,New York
-Bob,25,Los Angeles
-Charlie,35,Chicago`;
-
-const jsonData = csvToJSON("persons.csv", csvData);
-console.log(jsonData);
-console.log(JSON.stringify(jsonData));
 
 import "./App.css";
 
