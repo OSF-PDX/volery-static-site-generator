@@ -1,25 +1,25 @@
-export const csv2json = (filename, contents) => {
-    // Parse CSV contents and convert to JSON
-    const lines = contents.trim().split('\n');
-    const headers = lines[0].split(',').map(h => h.trim());
-    
-    const data = lines.slice(1).map(line => {
-        const values = line.split(',').map(v => v.trim());
-        const obj = {};
-        headers.forEach((header, index) => {
-            obj[header] = values[index];
-        });
-        return obj;
+export const csvToJSON = (filename, contents) => {
+  // Parse CSV contents and convert to JSON
+  const lines = contents.trim().split("\n");
+  const headers = lines[0].split(",").map((h) => h.trim());
+
+  const data = lines.slice(1).map((line) => {
+    const values = line.split(",").map((v) => v.trim());
+    const obj = {};
+    headers.forEach((header, index) => {
+      obj[header] = values[index];
     });
-    
-    const objectName = filename.split('.')[0]; // Use filename without extension as object name
+    return obj;
+  });
 
-    const fileData = {    
-        objectName,    
-        headers,
-        data
-    };
-    return fileData;
-}
+  const objectName = filename.split(".")[0]; // Use filename without extension as object name
 
-export default csv2json;
+  const fileData = {
+    objectName,
+    headers,
+    data,
+  };
+  return fileData;
+};
+
+export default csvToJSON;

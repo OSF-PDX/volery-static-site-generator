@@ -1,39 +1,38 @@
-import { useState } from "react";
-// import reactLogo from "./assets/react.svg";
-// import viteLogo from "./assets/vite.svg";
-// import heroImg from "./assets/hero.png";
-import csv2json from "./services/csv-to-json";
+import { useState, useRef } from "react";
 import voleryLogo from './assets/volery-logo-sketch.png';
-import { DownloadButton } from "./services/zip-download";
-import { RenderedTemplate } from "./services/templating";
-
-
-
-const csvData = `name,age,city
-Alice,30,New York
-Bob,25,Los Angeles
-Charlie,35,Chicago`;
-
-
-
-const jsonData = csv2json("persons.csv", csvData);
-// Simple test of the csv2json function.
-console.log(jsonData);
-console.log(JSON.stringify(jsonData));
+import {saveZip} from "./services/zip-download";
+import { buildSiteZipFromCSV } from "./services/generate-site";
 
 import "./App.css";
 
 function App() {
-  //const [count, setCount] = useState(0);
-//import { useState } from 'react'
-
-
-
-//function App() {
   const [error, setError] = useState(null);
+  const [csvText, setCSVText ] = useState(null);
+  const fileInputRef = useRef(null);
 
   const uploadCSV = () => {
-    setError("No upload function exists yet.");
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (!file.name.endsWith(".csv")) {
+      setError("Please upload a CSV file.");
+      setCSVText(null);
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      setCSVText(evt.target.result);
+      setError(null);
+    };
+    reader.readAsText(file);
+  };
+
+  const generateWebsite = async () => {
+    const zip = await buildSiteZipFromCSV(csvText);
+    saveZip(zip);
   }
 
   return (
@@ -47,9 +46,14 @@ function App() {
       <main id="main">
         <h1>Volery</h1>
           <p>
-            Conference name: <input />
-          </p>
-          <p>
+            {/* Hidden file input, triggered by the button below */}
+            <input 
+              ref={fileInputRef}
+              type="file"
+              accept=".csv"
+              style={{display: "none"}}
+              onChange={handleFileChange}
+            />
             <button
               className="csv-upload"
               onClick={uploadCSV}
@@ -62,7 +66,12 @@ function App() {
             {error && `Error: ${error}`}
           </p>
           <p>
-              <DownloadButton/>
+            <button
+              onClick={generateWebsite}
+              disabled={!csvText}
+            >
+              GENERATE WEBSITE
+            </button>
           </p>
       </main>
     </>
