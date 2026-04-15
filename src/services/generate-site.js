@@ -24,6 +24,7 @@ function generateHTML(scheduleData) {
   </head>
   <body>
     <h1>Conference Schedule</h1>
+    <button onclick="window.print();">Print this Page</button>
     <ul class="schedule">
       ${sessionItems}
     </ul>
