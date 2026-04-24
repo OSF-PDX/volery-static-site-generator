@@ -1,5 +1,6 @@
 import JSZip from "jszip";
 import csvToJSON from "./csv-to-json";
+import exportScript from "../site-scripts/export.js?raw";
 
 function formatSession(session) {
   return `
@@ -24,10 +25,21 @@ function generateHTML(scheduleData) {
   </head>
   <body>
     <h1>Conference Schedule</h1>
-    <button onclick="window.print();">Print this Page</button>
+    
+
+    <div class="export-bar">
+      <span class="export-label">Export schedule:</span>
+      <button class="export-btn" data-format="pdf" onclick="window.print();">Print this Page</button>
+      <button class="export-btn" data-format="json">JSON</button>
+      <button class="export-btn" data-format="csv">CSV</button>
+      <button class="export-btn" data-format="txt">Plain text</button>
+    </div>
+
     <ul class="schedule">
       ${sessionItems}
     </ul>
+
+    <script src="export.js"><\/script>
   </body>
   </html>
   `;
@@ -47,5 +59,7 @@ export async function buildSiteZipFromCSV(csvText) {
   const zip = new JSZip();
   zip.file("index.html", generateHTML(scheduleData));
   zip.file("style.css", CSS);
+  zip.file("export.js", exportScript);
+  zip.file("schedule.json", JSON.stringify(parsed.data, null, 2));
   return zip;
 }
