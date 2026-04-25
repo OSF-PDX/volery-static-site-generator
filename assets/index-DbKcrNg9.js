@@ -9918,7 +9918,7 @@ var import_client = (/* @__PURE__ */ __commonJSMin(((exports, module) => {
 var import_react = require_react();
 //#endregion
 //#region src/assets/volery-logo-sketch.png
-var volery_logo_sketch_default = "/assets/volery-logo-sketch-DgSy6SQi.png";
+var volery_logo_sketch_default = "/volery-static-site-generator/assets/volery-logo-sketch-DgSy6SQi.png";
 //#endregion
 //#region src/services/zip-download.jsx
 var import_StreamSaver = /* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJSMin(((exports, module) => {
