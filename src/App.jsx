@@ -5,6 +5,8 @@ import { buildSiteZipFromCSV } from "./services/generate-site";
 
 import "./App.css";
 
+console.log("Testing to see if GH Pages automatic rebuild and deploy on commit works.");
+
 function App() {
   const [error, setError] = useState(null);
   const [csvText, setCSVText ] = useState(null);
