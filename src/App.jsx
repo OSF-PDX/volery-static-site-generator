@@ -5,6 +5,8 @@ import { buildSiteZipFromCSV } from "./services/generate-site";
 
 import "./App.css";
 
+console.log("Testing deployment after deleting github-worflow branch.");
+
 function App() {
   const [error, setError] = useState(null);
   const [csvText, setCSVText ] = useState(null);
