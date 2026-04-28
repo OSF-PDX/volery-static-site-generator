@@ -13322,9 +13322,11 @@ function generateHTML(scheduleData) {
   </head>
   <body>
     <h1>Conference Schedule</h1>
+    
 
     <div class="export-bar">
       <span class="export-label">Export schedule:</span>
+      <button class="export-btn" data-format="pdf" onclick="window.print();">Print this Page</button>
       <button class="export-btn" data-format="json">JSON</button>
       <button class="export-btn" data-format="csv">CSV</button>
       <button class="export-btn" data-format="txt">Plain text</button>
