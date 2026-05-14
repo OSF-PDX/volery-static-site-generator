@@ -6,7 +6,7 @@ This app is designed to allow for easy drag-and-drop deployment of a conference 
 
 To start the app locally, run `npm run dev` from the project root.
 
-There is an `example-schedule.csv` file within `/public` that can be used to test the CSV upload functionality.
+There is an `example-schedule.csv` file within `/public` that can be used to test the CSV upload functionality. There is also now a file `public/example-schedule-with-escaped-commas.csv` that shows how to handle the case where you need to have commas *within* a field in the CSV files. Basically, we've got a simple escape functionality where you indicate a literal comma with '\,'. The code that splits the lines into fields also de-escapes these commas as it runs.
 
 The generated website will be downloaded to your computer as a ZIP containing the website files. 
 
