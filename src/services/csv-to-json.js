@@ -1,10 +1,16 @@
+const splitEscapedComma = (line) => {
+  return line
+    .split(/(?<!\\),/)
+    .map((value) => value.replace(/\\,/g, ",").trim());
+};
+
 export const csvToJSON = (filename, contents) => {
   // Parse CSV contents and convert to JSON
   const lines = contents.trim().split("\n");
-  const headers = lines[0].split(",").map((h) => h.trim());
+  const headers = splitEscapedComma(lines[0]);
 
   const data = lines.slice(1).map((line) => {
-    const values = line.split(",").map((v) => v.trim());
+    const values = splitEscapedComma(line);
     const obj = {};
     headers.forEach((header, index) => {
       obj[header] = values[index];
