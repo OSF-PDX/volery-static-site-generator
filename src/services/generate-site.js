@@ -48,7 +48,7 @@ function generateHTML(scheduleData) {
 const CSS = `
   body { font-family: sans-serif; max-width: 800px; margin: 2rem auto; padding 0 1rem; }
   .schedule { list-style: none; padding: 0; }
-  .session {border: 1px solid #ccc; border-radius: 4px; padding: 1rem; margin-bottom: 1rem; }
+  .session { break-inside: avoid; border: 1px solid #ccc; border-radius: 4px; padding: 1rem; margin-bottom: 1rem; }  
   .meta { color: #555; font-size: 0.9rem; }
   .speaker { font-weight: bold; }
 `;
